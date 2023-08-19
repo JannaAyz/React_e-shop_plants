@@ -1,0 +1,28 @@
+.Search_and_suggestions {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+}
+.bold {
+    font-weight: bold;
+}
+#suggestedPlants {
+    display: flex;
+    justify-content: center;
+
+    /* justify-content: center; */
+    /* flex-direction: column; */
+    gap: 30px;
+    cursor: pointer;
+    /* border: 1px solid grey; */
+    padding: 20px;
+}
+#suggestedPlants p, #suggestedPlants h2 {
+    text-align: left;
+}

@@ -1,0 +1,32 @@
+[
+    {
+      "id": "01",
+      "name": "Géranium",
+      "category": "Intérieur",
+      "img": "https://www.gettyimages.fr/detail/photo/white-and-red-geranium-image-libre-de-droits/154971845?adppopup=true",
+      "arrosage": 2,
+      "soleil": 1,
+      "descriptif": "Cette plante est parfaite pour l'intérieur.",
+      "keyWords": ["fleurs", "coloré", "resistant", "ROBUSTE"]
+    },
+    {
+      "id": "02",
+      "name": "Géranium2",
+      "category": "Intérieur",
+      "img": "https://www.gettyimages.fr/detail/photo/white-and-red-geranium-image-libre-de-droits/154971845?adppopup=true",
+      "arrosage": 2,
+      "soleil": 1,
+      "descriptif": "Cette plante est parfaite pour l'intérieur.",
+      "keyWords": ["fleurs", "coloré", "resistant", "ROBUSTE"]
+    },
+    {
+      "id": "03",
+      "name": "Cactus",
+      "category": "Extérieur",
+      "img": "https://www.gettyimages.fr/detail/photo/pink-flower-on-cactus-image-libre-de-droits/826097122?adppopup=true",
+      "arrosage": 1,
+      "soleil": 3,
+      "descriptif": "Cette plante prospère en plein air.",
+      "keyWords": ["PIQUE", "intérieur et extérieur", "resistant"]
+    }   
+  ]
