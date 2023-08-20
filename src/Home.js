@@ -131,7 +131,6 @@ function HomeHeader() {
                         <button type="submit" /*onClick={(event) => {
                             handleTextChange(event);
                         }}*/>
-                        {/* <Link to={`/Plants/${switchSearchData}/${searchText}`}>👀</Link></button> */}
                         <Link to={`/Plants/${switchSearchData}/${searchText}/`}>👀</Link></button>
                 </form> 
                 <div id="suggestedPlants" style={{ display: display }}>
@@ -150,9 +149,10 @@ function HomeHeader() {
                                     }}>
                                     <div style={{display: "flex", position: "relative"}}>
                                         <img src={item.img} style={{width: "40px", height: "40px"}}/>
-                                        <h4 style={{position: "absolute", top: "-20px", left: "60px"}}>{item.id}</h4>
+                                        <h4 style={{position: "absolute", top: "-20px", left: "60px"}}>{item.name}</h4>
                                     </div>
-                                    <p>{item.descriptif}</p>
+                                    {/* <p>{truncate(searchText, result)}</p> */}
+                                    <p>{result ? truncate(searchText, result) : item.descriptif}</p>
                                 </div>
                              </Link>
                              )

@@ -1,10 +1,15 @@
 import React from 'react'
+import './Styles/Plants.css';
+import { useState } from 'react';
 import {useParams} from "react-router-dom"
+// import {useParams, useState, useEffect} from "react-router-dom"
 import plantsData from './plants.json';
+import Cart from "./Cart.jsx"
+import Plants_description from './Single_plant_description';
 
 export default function PlantsPresentation() {
   const { switchSearchData, searchText, specificPlant } = useParams();
-  const idOfSpecificPlant = specificPlant;
+  const [idOfSpecificPlant, setIdOfSpecificPlant] = useState(specificPlant);
   let resultsToShow = [];
   let showSinglePlant = [];
   //searchText is constant
@@ -35,17 +40,15 @@ export default function PlantsPresentation() {
             readable(keyword).includes(variableSearchText))
           ) {
             resultsToShow.push(each);
-
           }
         })
     }
-    if (["Catégories", "All"].includes(switchSearchData)) {
-
+    if (["Catégories"].includes(switchSearchData)) {
       plantsData.forEach((each) =>
-        // (readable(each.category).includes(variableSearchText) && resultsToShow.each === {}) ? resultsToShow.push({each}) : null)
-        (readable(each.category).includes(variableSearchText)) ? resultsToShow.push({each}) : null)
+        // (readable(each.category).includes(variableSearchText) && resultsToShow.each) ? resultsToShow.push({each}) : null)
+        (readable(each.category).includes(variableSearchText)) ? resultsToShow.push(each) : null);
     }
-    
+
     //Alphabetical order based on names
     resultsToShow = resultsToShow.sort((a, b) => {
       if (a.name && b.name) {
@@ -57,34 +60,28 @@ export default function PlantsPresentation() {
 
   return (
     <React.Fragment>
+        <Cart />
         <h1>Plantes à adopter</h1>
+        <div className="all_plants_cards">
         {resultsToShow.map((item, index) => {
         // Use "item.each" if it exists (for "Categories")
         // Otherwise use "item" (for "Produits")
         const differs = item.each || item; 
         
         return (
-          <div key={index}>
-            <h2>{differs.name}</h2>
-            <p>{differs.category}</p>
-          </div>
+            <div key={index} className="plants_card" onClick={() => {setIdOfSpecificPlant(differs.id)}}>
+              <h2>{differs.name}</h2>
+              <p>{differs.category}</p>
+              <img src={differs.img} style={{width: 50 + "px", height: 50 + "px"}}/>
+              <p>Besoins en eau : </p>
+              <p>Besoins en lumière : </p>
+              <button>Acheter</button>
+            </div>
         );
       })}
-
- 
-                         {idOfSpecificPlant !== '0' ? ( 
-                          showSinglePlant.map((aPlant, index) => 
-                          <div key={index} style={{background: "yellow", padding: 30 + "px"}}>
-                          <h2>La plante Unique</h2>
-                          <h1 >{aPlant.name}</h1>
-                          
-                         
-                          </div>
-                          )
-                         ) : null}
-          
-
-
+      </div>
+      {/* If the user selected one particular plant */}
+      {idOfSpecificPlant !== '0' ? <Plants_description showSinglePlant = {showSinglePlant} setIdOfSpecificPlant = {setIdOfSpecificPlant} /> : null}
     </React.Fragment>
   )
 }
