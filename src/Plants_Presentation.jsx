@@ -19,6 +19,7 @@ export default function PlantsPresentation() {
   let showSinglePlant = [];
   //searchText is constant:
   let variableSearchText = searchText;
+  // let indicator = 'off';
 
   // function handle_Plants_in_Cart(plant_name) {
 
@@ -68,9 +69,16 @@ export default function PlantsPresentation() {
       return 0; 
     });
 
+    // useEffect(() => {
+    //     setPlantsInCart([...plantsInCart, differs])
+
+    //     // Vous pouvez placer ici le code que vous souhaitez exécuter à chaque changement de "count"
+    
+    //   }, [indicator]);
+
   return (
     <React.Fragment>
-        <Cart plantsInCart={plantsInCart} setPlantsInCart={setPlantsInCart} new_plant = {new_plant}/>
+        <Cart plantsInCart={plantsInCart} new_plant = {new_plant}/>
         <h1>Plantes à adopter</h1>
         <div className="all_plants_cards">
         {resultsToShow.map((item, index) => {
@@ -87,8 +95,10 @@ export default function PlantsPresentation() {
                 <p>Besoins en eau : <Water water_level = {differs.water}/></p>
                 <p>Besoins en lumière : <Sun sun_level = {differs.light}/></p>
               </div>
-              <button onClick={() => {setPlantsInCart([...plantsInCart, differs]);
+              <button onClick={() => {
+                                      setPlantsInCart([...plantsInCart, differs]);
                                       set_New_plant(differs.name);
+                                      console.log(plantsInCart)
                                       }}>
                   Ajouter au panier
               </button>
