@@ -10,11 +10,10 @@ function HomeHeader() {
     const [searchObjects, setSearchObjects] = useState([]);
     const [display, setDisplay] = useState("none");
     const [switchSearchData, setSwitchSearchData] = useState('');
-    // const [specificPlant, setSpecificPlant] = useState('');
     let filteredProducts = [];
     let filteredCategories = [];
     let filteredObjects = [];
-    let specificPlant = '0';
+    let specificPlant = '00';
 
     function handleTextChange(event) {
         setSearchText(event.target.value);
@@ -32,18 +31,13 @@ function HomeHeader() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-
-        // First make a string out of plantsData :
-        // const stringifiedPlantsData = plantsData.map(obj => readable(JSON.stringify(obj)).replace(/[[\]"":{},.\-!;]/g, ''));
-
-        // console.log(stringifiedPlantsData)
         // Search data in Categories or in the rest 
         plantsData.forEach((each) => {
             // Some results go to filteredCategories[]
             findOccurences(each.category, filteredCategories)
             // Other results go to filteredProducts []
             findOccurences(each.name, filteredProducts)
-            findOccurences(each.descriptif, filteredProducts)
+            findOccurences(each.description, filteredProducts)
             each.keyWords.forEach((keyword) => {
                 findOccurences(keyword, filteredProducts)
             });    
@@ -123,15 +117,14 @@ function HomeHeader() {
         <React.Fragment>
             <div className="Search_and_suggestions">
                 <form id="searchForm" onSubmit={(event) => {event.preventDefault()}}>
-                        <input id="searchByKeywords" type="text" placeholder="Recherche" onChange={(event) => {
-                            handleTextChange(event);
-                            handleFormSubmit(event);
-                            switchSearchData === '' ? setSwitchSearchData("All") : null;
-                        }}/>
-                        <button type="submit" /*onClick={(event) => {
-                            handleTextChange(event);
-                        }}*/>
-                        <Link to={`/Plants/${switchSearchData}/${searchText}/`}>👀</Link></button>
+                    <input id="searchByKeywords" type="text" placeholder="Recherche" onChange={(event) => {
+                        handleTextChange(event);
+                        handleFormSubmit(event);
+                        switchSearchData === '' ? setSwitchSearchData("All") : null;
+                    }}/>
+                    <button type="submit">
+                        <Link to={`/Plants/${switchSearchData}/${searchText}/${specificPlant}`}>👀</Link>
+                    </button>
                 </form> 
                 <div id="suggestedPlants" style={{ display: display }}>
                     <div>
@@ -151,44 +144,37 @@ function HomeHeader() {
                                         <img src={item.img} style={{width: "40px", height: "40px"}}/>
                                         <h4 style={{position: "absolute", top: "-20px", left: "60px"}}>{item.name}</h4>
                                     </div>
-                                    {/* <p>{truncate(searchText, result)}</p> */}
                                     <p>{result ? truncate(searchText, result) : item.descriptif}</p>
                                 </div>
                              </Link>
                              )
                         })}
 
-
-                        {/* {searchResults.map((result, index) =>
-                        <Link to={`/Plants/${switchSearchData}/${searchText}/${encodeURIComponent(JSON.stringify(specificPlant))}`} key={`${index}_${result}`}>
-                            <p key={`${index}_${result}`} onClick={() => {
-                            changeSearchValue((result));
-                            setSwitchSearchData("Produits");
-                            specificPlant.push(searchObjects[0]);
-                            // specificPlant = JSON.stringify(encodeURIComponent(specificPlant));
-
-                            }}>
-                            {truncate(searchText, result)}
-                        </p>
-                        </Link>
-                        )} */}
-
-
-
-
                         {searchCategories.length > 0 ? <h2>Catégories</h2> : null}
                         {searchCategories.map((result, index) => {
-                            specificPlant = '0';
+                            specificPlant = '00';
                             return (
-                            <a href={`/Plants/${switchSearchData}/${searchText}/${specificPlant}/`} key={`${index}_${result}`}>
+                            <Link to={`/Plants/${switchSearchData}/${searchText}/${specificPlant}/`} key={`${index}_${result}`}>
                                 <p key={`${index}_${result}`} onClick={() => {
-                                changeSearchValue((result));
-                                setSwitchSearchData("Catégories");
-                                }}>
-                                {truncate(searchText, result)}
-                            </p></a>)})}
+                                    changeSearchValue((result));
+                                    setSwitchSearchData("Catégories");
+                                    }}>
+                                    {truncate(searchText, result)}
+                                </p>
+                            </Link>)})}
                     </div>
                 </div>
+            </div>
+            <div className="quick_research">
+                <Link to="/Plants/Catégories/intérieur/00/"> 
+                        <p>Plantes d`intérieur</p>
+                </Link>
+                <Link to="/Plants/Catégories/extérieur/00/"> 
+                        <p>Plantes d`extérieur</p>
+                </Link>
+                <Link to="/Plants/Catégories/artificielle/00/"> 
+                        <p>Plantes artificielles</p>
+                </Link>
             </div>
         </React.Fragment>
     );

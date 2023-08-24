@@ -6,9 +6,9 @@
       "img": "/Images/geranium_rouge.jpg",
       "water": 2,
       "light": 1,
-      "descriptif": "Cette plante est parfaite pour l'intérieur.",
+      "description": "Cette plante est parfaite pour l'intérieur.",
       "keyWords": ["fleurs", "coloré", "resistant", "ROBUSTE"],
-      "prix": 10
+      "price": 10
     },
     {
       "id": "02",
@@ -17,9 +17,9 @@
       "img": "/Images/geranium_blanc.jpg",
       "water": 2,
       "light": 1,
-      "descriptif": "Cette plante est parfaite pour l'intérieur.",
+      "description": "Cette plante est parfaite pour l'intérieur.",
       "keyWords": ["fleurs", "coloré", "resistant", "ROBUSTE"],
-      "prix": 10
+      "price": 10
     },
     {
       "id": "03",
@@ -28,9 +28,9 @@
       "img": "/Images/cactus.jpg",
       "water": 1,
       "light": 3,
-      "descriptif": "Cette plante prospère en plein air.",
+      "description": "Cette plante prospère en plein air.",
       "keyWords": ["PIQUE", "intérieur et extérieur", "resistant"],
-      "prix": 15
+      "price": 15
     },
     {
       "id": "04",
@@ -39,9 +39,9 @@
       "img": "/Images/olivier_pot.jpg",
       "water": 1,
       "light": 3,
-      "descriptif": "Cette plante prospère avec beaucoup de soleil.",
+      "description": "Cette plante prospère avec beaucoup de soleil.",
       "keyWords": ["fruit", "olive", "chaud"],
-      "prix": 30
+      "price": 30
     },
     {
       "id": "05",
@@ -50,9 +50,9 @@
       "img": "/Images/artificial_monstera.jpg",
       "water": 0,
       "light": 0,
-      "descriptif": "Verte, 85cm de long, en EVA, Polyéthylène et fil de fer",
+      "description": "Verte, 85cm de long, en EVA, Polyéthylène et fil de fer",
       "keyWords": ["plastique", "decoration", "intérieur", "vert", "feuilles"],
-      "prix": 20
+      "price": 20
     },
     {
       "id": "06",
@@ -61,8 +61,8 @@
       "img": "",
       "water": 0,
       "light": 0,
-      "descriptif": "Tige de 2,3m de long, en ABS en Polyéthylène",
+      "description": "Tige de 2,3m de long, en ABS en Polyéthylène",
       "keyWords": ["plastique", "decoration", "intérieur", "vert", "feuilles", "long"],
-      "prix": 20
+      "price": 20
     }        
   ]
