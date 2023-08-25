@@ -98,7 +98,7 @@ export default function PlantsPresentation() {
               <button onClick={() => {
                                       setPlantsInCart([...plantsInCart, differs]);
                                       set_New_plant(differs.name);
-                                      console.log(plantsInCart)
+                                      // console.log(plantsInCart)
                                       }}>
                   Ajouter au panier
               </button>
