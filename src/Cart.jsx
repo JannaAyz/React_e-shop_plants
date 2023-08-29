@@ -1,116 +1,57 @@
 import PropTypes from "prop-types";
-// import {React, useState, useEffect} from 'react';
-import {useState} from 'react';
-import {useEffect} from 'react';
-import {React} from 'react';
+import {React, useEffect, useState} from 'react';
 import './Styles/Plants.css';
 // import Total from "./Total";
 
-function Cart(props) {
-
-    // for (let i = 0; i < props.plantsInCart.length; i++) {
-    //     if (props.plantsInCart[i].amount === undefined)
-    //         props.plantsInCart[i].amount = 0; 
-
-    //     if (props.plantsInCart[i].name === props.new_plant)
-    //     {
-    //         props.plantsInCart[i].amount += 1; 
-    //         break;
-    //     }
-    // }
-
-    // let finalPlantsInCart = [' '];
-    // const idSet = new Set();
-
-    // for (const plant of props.plantsInCart) {
-    //     if (!idSet.has(plant.id)) {
-    //         idSet.add(plant.id);
-    //         finalPlantsInCart.push(plant);
-    //     }
-    // }
-
-    // const [updatedArray, setUpdatedArray] = useState([]);
-
-
-    // useEffect(() => {
-    //     setUpdatedArray(finalPlantsInCart);
-    //     finalPlantsInCart.map((a_plant, index) => ( index !== 0 && (a_plant.amount -= 1)));
-    //   }, [props.plantsInCart]);
-    
-    // return (
-    //     <div className="cart">
-    //         <p>Votre panier</p>
-    //         {finalPlantsInCart.map((a_plant, index) => (
-    //             index !== 0 && (
-    //                 <div key={`${a_plant.name}-${index}`}>
-    //                     <p>{a_plant.name} : {a_plant.price} € X {a_plant.amount}</p>
-    //                     <input type="number"  onClick={(event) => {
-    //                         a_plant.amount = parseInt(event.target.value, 10) - 1;
-    //                         setUpdatedArray(finalPlantsInCart);
-    //                     }} defaultValue={a_plant.amount} min='1' />
-    //                 </div>
-    //             )
-    //         ))}
-    //         <Total updatedArray = {updatedArray}/>
-    //     </div>
-    // );
-
+function Cart(props) {    
+    const [copyPlantsInCart, setCopyPlantsInCart] = useState([]);
     let total = [0];
-    const [finalPlantsInCart, setFinalPlantsInCart] = useState([]);
-
+    let updatedPlants = props.plantsInCart;
+  
+    updatedPlants = [...new Set(updatedPlants)]; 
     useEffect(() => {
-        setFinalPlantsInCart(props.plantsInCart)
+
+        updatedPlants.map((each) => !each.amount ? each.amount = 0 : null);
+
+        for(let i = 0; i < updatedPlants.length; i++) {
+            if (updatedPlants[i].name === props.new_plant) {
+                updatedPlants[i].amount++;
+                break;
+            }
+        }
+        updatedPlants = [...new Set(updatedPlants)];
+
+        setCopyPlantsInCart([...updatedPlants]);
+
+    }, [props.plantsInCart, props.new_plant]);
 
 
-        
-
-
-        // finalPlantsInCart.map((each) => each.name === props.new_plant ? each.amount += 1 : each.amount = 1);
-
-       
-    }, [props.plantsInCart]);
-
-    finalPlantsInCart.map((each) => each.amount === undefined ? each.amount = 1 : null )
-
-    // for (let i = 0 ; i < finalPlantsInCart.length ; i++) {
-    //         let j = 0;
-    //         while (props.plantsInCart[j] !== undefined)
-    //         {
-    //             if (finalPlantsInCart[i] === props.plantsInCart[j]) 
-    //             finalPlantsInCart[i].amount++;
-    //             j++;
-    //         }
-    // }
-    
-    
-    let arrayToShow = [...new Set(finalPlantsInCart)];
-
-    total =  arrayToShow.length > 0 ? arrayToShow.map((each) => each.price * each.amount) : [0];
-        
+    total =  updatedPlants.length > 0 ? updatedPlants.map((each) => each.price * each.amount) : [0];        
     total = total.reduce((total, plant) => parseInt(total + plant));
 
+    function change_amount(index, quantity) {
 
-    console.log("finalPlantsInCart :")
-    console.log(finalPlantsInCart)
+        updatedPlants[index].amount = quantity;
+        setCopyPlantsInCart([...updatedPlants]);
+    }
 
-    console.log("props.plantsInCart :")
-    console.log(props.plantsInCart)
-
-
-    console.log("arrayToShow :")
-    console.log(arrayToShow)
-
-    
-    console.log(total)
 
     return (
             <div className="cart">
-                {arrayToShow !== undefined ? arrayToShow.map((a_plant, index) => 
-                    <div key={`${a_plant.name}-${index}`}>
-                        <p>{a_plant.name} X {a_plant.amount}</p>
-                    </div>
-                ) : null}
-                <h3>{total}</h3>
+            {copyPlantsInCart.map((a_plant, index) => (
+                <div key={`${a_plant.name}-${index}`} style={{display: "flex"}}>
+                <p>{a_plant.name} X </p>
+                <input
+                    type="number"
+                    onChange={(event) => change_amount(index, parseInt(event.target.value, 10))}
+                    // default={a_plant.amount}
+                    value={a_plant.amount}
+                    min='1'
+                    style={{width: 40 + "px", height: 20 + "px", marginTop: 15 + "px", marginLeft: 5}}
+                />
+                </div>
+            ))}
+            <h3>{total ? total : 0}</h3>
             </div>
         )
     }
