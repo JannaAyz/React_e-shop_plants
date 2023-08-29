@@ -1,22 +1,26 @@
 import PropTypes from "prop-types";
-import {React} from 'react';
+import {React, useEffect, useState} from 'react';
 
 function Total(props) {
+    const [total, setTotal] = useState([0])
+    let stockArray;
 
-    console.log(props.updatedArray)
+    useEffect(() => {
+        stockArray = props.updatedPlants.length > 0 ? props.updatedPlants.map((each) => each.price * each.amount) : [0]; 
+        stockArray = stockArray.reduce((total, plant) => parseInt(total + plant)); 
+        
+        setTotal(stockArray);
+    }, [props.updatedPlants, props.copyPlantsInCart]);
+    
 
     return (
-        <h3>Total : {props.updatedArray.length > 1 ?
-                    props.updatedArray.reduce((total, plant) => total + ((plant.amount / 2) * plant.price))
-                    // : props.updatedArray[1].price
-                    : <span>0</span>
-                    }
-        </h3>
+        <h3>{total ? total : 0}</h3>
     );
 }
 
 Total.propTypes = {
-    updatedArray: PropTypes.array.isRequired
+    updatedPlants: PropTypes.array.isRequired,
+    copyPlantsInCart: PropTypes.array.isRequired
 };
 
 export default Total;
